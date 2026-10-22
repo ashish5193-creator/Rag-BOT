@@ -1,0 +1,33 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="langchain" />
+          <option value="langgraph" />
+          <option value="langchain_community" />
+          <option value="langchain_core" />
+          <option value="langchain_groq" />
+          <option value="langchain_openai" />
+          <option value="faiss-cpu" />
+          <option value="tavily-python" />
+          <option value="bs4" />
+          <option value="requests" />
+          <option value="beautifulsoup4" />
+          <option value="pydantic" />
+          <option value="langchain-text-splitters" />
+          <option value="python-dotenv" />
+          <option value="PyYAML" />
+          <option value="fastapi" />
+          <option value="uvicorn" />
+          <option value="motor" />
+          <option value="pymongo" />
+          <option value="streamlit" />
+          <option value="langchain-qdrant" />
+          <option value="python-multipart" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
