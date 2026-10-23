@@ -2,11 +2,20 @@ import uuid
 
 import requests
 import streamlit as st
+from streamlit.errors import StreamlitSecretNotFoundError
 
 from app.config import settings
 
 
 st.set_page_config(page_title="DocMind", page_icon="💬", layout="wide")
+
+
+def _api_base_url() -> str:
+    try:
+        configured_url = st.secrets.get("PYTHON_API_URL")
+    except StreamlitSecretNotFoundError:
+        configured_url = None
+    return str(configured_url or settings.python_api_url).rstrip("/")
 
 
 def _request_error(response: requests.Response) -> str:
@@ -96,7 +105,7 @@ def _chat_page() -> None:
             elif uploaded_file is not None:
                 try:
                     response = requests.post(
-                        f"{settings.python_api_url}/rag/documents/upload",
+                        f"{_api_base_url()}/rag/documents/upload",
                         files={
                             "file": (
                                 uploaded_file.name,
@@ -132,7 +141,7 @@ def _chat_page() -> None:
             with st.spinner("Thinking..."):
                 try:
                     response = requests.post(
-                        f"{settings.python_api_url}/rag/query",
+                        f"{_api_base_url()}/rag/query",
                         json={
                             "query": prompt,
                             "session_id": st.session_state.session_id,

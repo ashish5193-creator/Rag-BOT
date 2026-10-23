@@ -33,6 +33,28 @@ The frontend production login expects the Rust authentication service to expose
 authorization; protect them behind an authenticated deployment gateway before
 public use.
 
+## Deploying Streamlit and FastAPI separately
+
+The Streamlit frontend makes backend requests from the Streamlit server. In a
+hosted deployment, `127.0.0.1` refers to the Streamlit machine/container, not
+your computer and not a separately hosted FastAPI service. Deploy FastAPI as a
+reachable service and configure the frontend's `PYTHON_API_URL` to its public
+base URL, for example `https://your-api.example.com` (do not add `/rag/query`).
+The backend must be reachable over HTTPS and allow requests from the frontend
+deployment.
+
+For Streamlit Community Cloud, add this setting under **App settings >
+Secrets**:
+
+```toml
+PYTHON_API_URL = "https://your-api.example.com"
+```
+
+The frontend reads `PYTHON_API_URL` from Streamlit Secrets when present, and
+otherwise uses the environment variable or local default. Configure the backend
+with its own OpenAI, Qdrant, MongoDB, and Tavily settings. Do not use a localhost
+Qdrant or MongoDB address in the backend unless those services run alongside it.
+
 ## API
 
 - `GET /` returns `{"status":"running"}`.
