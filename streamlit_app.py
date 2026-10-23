@@ -6,7 +6,7 @@ import streamlit as st
 from app.config import settings
 
 
-st.set_page_config(page_title="Adaptive RAG", page_icon="💬", layout="wide")
+st.set_page_config(page_title="DocMind", page_icon="💬", layout="wide")
 
 
 def _request_error(response: requests.Response) -> str:
@@ -18,7 +18,7 @@ def _request_error(response: requests.Response) -> str:
 
 
 def _login_page() -> None:
-    st.title("Adaptive RAG")
+    st.title("DocMind")
     st.caption("Sign in to chat with uploaded documents, general knowledge, or web search.")
     if settings.streamlit_dev_mode:
         st.info("Local development mode is enabled. Authentication is bypassed.")
@@ -83,7 +83,7 @@ def _authenticate(endpoint: str, username: str, password: str) -> None:
 
 
 def _chat_page() -> None:
-    st.title("RAG BOT")
+    st.title("DocMind by Ashish")
     with st.sidebar:
         st.subheader("Upload a document")
         uploaded_file = st.file_uploader(
